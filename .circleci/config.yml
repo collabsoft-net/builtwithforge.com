@@ -2,17 +2,17 @@ version: 2.1
 jobs:
 
   # cloud - production
-  forge-report-functions:
+  forge-report-app-functions:
     executor: functions
     steps:
       - functions:
-          project: forge-report
+          project: forge-report-app
 
-  forge-report-hosting:
+  forge-report-app-hosting:
     executor: hosting
     steps:
       - hosting:
-          project: forge-report
+          project: forge-report-app
 
 executors:
       
@@ -87,14 +87,14 @@ workflows:
   deploy:
     jobs:
       # Cloud - Production
-      - forge-report-functions:
+      - forge-report-app-functions:
           filters:
             branches:
               only: main
           context: forge.report
-      - forge-report-hosting:
+      - forge-report-app-hosting:
           requires:
-            - forge-report-functions
+            - forge-report-app-functions
           filters:
             branches:
               only: main
