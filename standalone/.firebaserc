@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "forge-report": {
+      "hosting": {
+        "forge-report-app": [
+          "forge-report-app"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+node_modules
+dist
+public
+local.json
+functions/lib
+yarn-error.log
+standalone/functions/lib
+.vscode
+
+# Logs
+standalone/pubsub-debug.log
+
+# Greenlock
+standalone/.greenlock/
+standalone/.greenlockrc
+
+# Yarn cache
+.yarn/cache
+.yarn/install-state.gz
+
+lerna-debug.log
+install-state.gz
+*.log

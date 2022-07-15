@@ -1,0 +1,101 @@
+version: 2.1
+jobs:
+
+  # cloud - production
+  forge-report-functions:
+    executor: functions
+    steps:
+      - functions:
+          project: forge-report
+
+  forge-report-hosting:
+    executor: hosting
+    steps:
+      - hosting:
+          project: forge-report
+
+executors:
+      
+  functions:
+    docker:
+      - image: cimg/node:16.14.2-browsers
+    resource_class: large
+    working_directory: ~/forge/standalone/functions
+
+  hosting:
+    docker:
+      - image: cimg/node:16.14.2-browsers
+    resource_class: large
+    working_directory: ~/forge/standalone
+
+commands:
+
+  prepare:
+    steps:
+      - checkout:
+          path: ~/forge
+
+      - run:
+          name: Setup environment
+          command: |
+            npm install --prefix=$HOME/.local yarn@berry -g
+            yarn --version
+
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "~/forge/yarn.lock" }}
+      - run: 
+          name: Install dependencies
+          command: |
+            (cd ~/forge && yarn install --immutable)
+
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "~/forge/yarn.lock" }}
+          paths:
+            - ~/forge/.yarn/cache
+            - ~/forge/.yarn/unplugged
+
+  functions:
+    parameters:
+      project:
+        type: string
+    steps:
+      - prepare
+
+      - deploy:
+          name: Deploy firebase functions
+          command: yarn run firebase deploy -f --only functions --project << parameters.project >>
+
+  hosting:
+    parameters:
+      project:
+        type: string
+    steps:
+      - prepare
+      
+      - deploy:
+          name: Deploy firebase hosting & database
+          command: |
+            export NODE_ENV=production
+            yarn build
+            yarn run firebase deploy -f --only hosting --project << parameters.project >>
+
+workflows:
+  version: 2
+  deploy:
+    jobs:
+      # Cloud - Production
+      - forge-report-functions:
+          filters:
+            branches:
+              only: main
+          context: forge.report
+      - forge-report-hosting:
+          requires:
+            - forge-report-functions
+          filters:
+            branches:
+              only: main
+          context: forge.report
