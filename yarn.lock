@@ -2194,7 +2194,6 @@ __metadata:
     "@atlaskit/spinner": 15.1.12
     "@aws-sdk/client-route-53": 3.128.0
     "@collabsoft-net/clients": 1.0.0-alpha.194
-    "@collabsoft-net/components": 1.0.0-alpha.194
     "@collabsoft-net/controllers": 1.0.0-alpha.194
     "@collabsoft-net/dto": 1.0.0-alpha.176
     "@collabsoft-net/emitters": 1.0.0-alpha.176
@@ -2212,8 +2211,6 @@ __metadata:
     "@sentry/browser": 7.6.0
     "@sentry/minimal": 6.19.7
     "@sentry/node": 7.6.0
-    "@types/react": 18.0.15
-    "@types/react-dom": 18.0.6
     "@typescript-eslint/eslint-plugin": 5.30.6
     "@typescript-eslint/parser": 5.30.6
     arrive: 2.4.1
@@ -2246,8 +2243,6 @@ __metadata:
     passport: 0.6.0
     path-to-regexp: 6.2.1
     query-string: 7.1.1
-    react: 18.2.0
-    react-dom: 18.2.0
     reflect-metadata: 0.1.13
     rollup: 2.76.0
     rollup-plugin-sourcemaps: 0.6.3
