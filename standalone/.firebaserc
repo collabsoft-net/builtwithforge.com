@@ -1,6 +1,6 @@
 {
   "targets": {
-    "forge-report": {
+    "forge-report-app": {
       "hosting": {
         "forge-report-app": [
           "forge-report-app"
