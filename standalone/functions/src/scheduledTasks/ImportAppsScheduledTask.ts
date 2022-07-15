@@ -4,7 +4,7 @@ import { AbstractScheduledPubSubHandler } from '@collabsoft-net/functions';
 import { Repository } from '@collabsoft-net/types';
 import { App } from 'API/entities/App';
 import { ScheduledTasks } from 'API/enums/Events';
-import Injectables from 'API/injectables';
+import Injectables from 'API/Injectables';
 import { AppService } from 'API/services/AppService';
 import axios from 'axios';
 import { error, log } from 'firebase-functions/logger';
