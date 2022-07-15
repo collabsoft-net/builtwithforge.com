@@ -20,9 +20,7 @@ if (process.env.SENTRY_DSN) {
 
 const runtimeOptions: RuntimeOptions = {
   memory: '512MB',
-  timeoutSeconds: 300,
-  vpcConnector: process.env.GCLOUD_PROJECT,
-  vpcConnectorEgressSettings: 'PRIVATE_RANGES_ONLY'
+  timeoutSeconds: 300
 };
 
 export const app = functions.runWith(runtimeOptions).https.onRequest(createAppServer(container));
