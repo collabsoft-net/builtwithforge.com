@@ -151,7 +151,7 @@ export const Index = () => {
                 </Row>
                 <Row margin="16px 0 0">
                   <Paragraph>
-                    Your daily updated list of Forge apps as listed on the Atlassian Marketplace
+                    Your daily updated overview of Forge apps as listed on the Atlassian Marketplace
                   </Paragraph>
                 </Row>
               </Grid>
