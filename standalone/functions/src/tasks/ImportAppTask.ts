@@ -6,6 +6,7 @@ import { Tasks } from 'API/enums/Events';
 import { ImportAppEvent } from 'API/events/ImportAppEvent';
 import Injectables from 'API/Injectables';
 import { AppService } from 'API/services/AppService';
+import { RawAppService } from 'API/services/RawAppService';
 import axios from 'axios';
 import { error, log } from 'firebase-functions/logger';
 import { pubsub } from 'firebase-functions/v1';
@@ -39,6 +40,7 @@ export class ImportAppTask implements PubSubHandler {
   async run(app: any) {
     try {
       const appService = AppService.getInstance(this.repository);
+      const rawService = RawAppService.getInstance(this.repository);
 
       log(`==> Retrieving listing details for app ${app.id} from the GraphQL API`);
       const listing = await this.getAppDetails(app.id);
@@ -58,9 +60,12 @@ export class ImportAppTask implements PubSubHandler {
         }
       }
 
+      log(`==> Persisting source data for app ${app.id} to Firebase`);
+      await rawService.save(app);
+
       if (app.type === 'forge') {
         const entity = this.toAppEntity(app);
-        log(`==> Persisting Forge app ${app.id} to Firebase`, { entity });
+        log(`==> Persisting Forge app ${app.id} to Firebase`);
         await appService.save(entity);
       }
 
@@ -98,8 +103,7 @@ export class ImportAppTask implements PubSubHandler {
       distribution: {
         totalInstalls: app._embedded.distribution.totalInstalls,
         totalUsers: app._embedded.distribution.totalUsers,
-      },
-      _raw: app
+      }
     };
   }
 

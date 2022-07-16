@@ -1,4 +1,5 @@
 
 export enum BasePaths {
-  APPS = '/apps'
+  APPS = '/apps',
+  RAWAPPS = '/_raw'
 }
