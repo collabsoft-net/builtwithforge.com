@@ -149,30 +149,12 @@ export const Index = () => {
                 <Row>
                   <Header weight='h900'>State of Forge</Header>
                 </Row>
+                <Row margin="16px 0 0">
+                  <Paragraph>
+                    Your daily updated list of Forge apps as listed on the Atlassian Marketplace
+                  </Paragraph>
+                </Row>
               </Grid>
-            </Row>
-            <Row margin="16px 0 0">
-              <Paragraph>
-                On July 8th, 2022, Atlassian <a href="https://blog.developer.atlassian.com/its-time-to-celebrate-forge-turns-one/" target="_blank">celebrated the first anniversary of Forge</a>, 
-                their new platform for creating Cloud apps for the Atlassian product suite. The article highlights a lot of the milestones that the platform has reached during the early stages, 
-                including the number of downloads of the CLI and the amount of apps created. 
-              </Paragraph>
-              <Paragraph>
-                Although the target audience for Forge is the broader Atlassian Ecosystem, which includes in-house developers and hobbyists, there is a select group of people that develop apps for a living. 
-                The (paid) apps that they create are published to the Atlassian Marketplace. This group is called the Atlassian Marketplace Partners, and they take a special interest in Forge as Atlassian
-                has indicated that this will be the preferred platform to create Cloud apps.
-              </Paragraph>
-              <Paragraph>
-                That is why this group is particulairy interested in the progress of Forge, and more specifically, have detailed insights into the current state of forge with regard to commercial exploitation
-                of Forge apps. Unfortunately, Atlassian does not provide much information about Forge apps. For instance, it is not possible to filter Forge apps on the Atlassian Marketplace itself.
-              </Paragraph>
-              <Paragraph>
-                Which is why we spent some time creating a more complete overview of the State of Forge, by providing a daily updated list of Forge apps as listed on the Atlassian Marketplace. You can browse
-                the list and filter it. The purpose of this list is to provide more insights to power your business decisions.
-              </Paragraph>
-              <Paragraph>
-                <Header weight='h300'>Ok, enough talk, show me the list of Forge apps!</Header>
-              </Paragraph>
             </Row>
           </Grid>
         </Row>
