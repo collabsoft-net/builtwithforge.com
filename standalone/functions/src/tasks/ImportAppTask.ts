@@ -39,6 +39,7 @@ export class ImportAppTask implements PubSubHandler {
 
   async run(app: any) {
     try {
+      log(`==> Start processing app ${app.id}`);
       const appService = AppService.getInstance(this.repository);
       const rawService = RawAppService.getInstance(this.repository);
 
@@ -69,10 +70,10 @@ export class ImportAppTask implements PubSubHandler {
         await appService.save(entity);
       }
 
-      log('==> Finished retrieving Forge apps from the Atlassian Marketplace API');
+      log(`==> Finished processing app ${app.id}`);
     } catch (err) {
       const { message } = err as Error;
-      error('==> Failed to retrieve Forge apps from the Atlassian Marketplace API', { innerException: message });
+      error(`==> Failed to retrieve app details for app ${app.id}`, { app, innerException: message });
     }
   }
 
@@ -89,7 +90,7 @@ export class ImportAppTask implements PubSubHandler {
       summary: app.listing.summary,
       tagline: app.listing.tagline,
       createdAt: app.listing.createdAt,
-      categories: app.listing.categories.map((item: any) => item.name),
+      categories: app.listing.categories?.map((item: any) => item.name) || [],
       logoId: app.listing.logo.original.id,
       hosting: app.listing.productHostingOptions,
       isPaid: cloudAppVersion.paymentModel === 'PAID_VIA_ATLASSIAN',
