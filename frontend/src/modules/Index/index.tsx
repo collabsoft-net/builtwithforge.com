@@ -9,7 +9,13 @@ import { AppDTO } from 'API/dto/AppDTO';
 import { HeadType, RowType } from '@atlaskit/dynamic-table/dist/types/types';
 import Avatar from '@atlaskit/avatar';
 import CheckIcon from '@atlaskit/icon/glyph/check';
+import SearchIcon from '@atlaskit/icon/glyph/search';
 import { camelCase } from '@collabsoft-net/helpers';
+import Textfield from '@atlaskit/textfield';
+import { colors } from '@atlaskit/theme';
+import Spinner from '@atlaskit/spinner';
+import Select from '@atlaskit/select';
+import { Field } from '@atlaskit/form';
 
 const createHead = () => {
   const head: HeadType = {
@@ -129,15 +135,66 @@ const createRows = (apps: Array<AppDTO>) => {
   });
 };
 
+const hostingOptions = [
+  { label: 'All', value: '' },
+  { label: 'Only Cloud', value: 'cloud' },
+  { label: 'Multiple platforms', value: 'p2' }
+];
+
+const paymentOptions = [
+  { label: 'All', value: '' },
+  { label: 'Paid', value: 'paid' },
+  { label: 'Free', value: 'free' },
+];
+
+const hostOptions = [
+  { label: 'All', value: '' },
+  { label: 'Jira', value: 'Jira' },
+  { label: 'Confluence', value: 'Confluence' },
+];
+
 export const Index = () => {
 
   const [ service ] = useState(kernel.get<RestClientService>(Injectables.RestClientService));
   const [ apps, setApps ] = useState<Array<AppDTO>>([]);
+  const [ displayedApps, setDisplayedApps ] = useState<Array<AppDTO>>([]);
   const [ isLoading, setLoading ] = useState<boolean>(true);
 
+  const [ filter, setFilter ] = useState<string>();
+  const [ host, setHost ] = useState<string>('');
+  const [ hosting, setHosting ] = useState<string>('');
+  const [ payment, setPayment ] = useState<string>('');
+
   useEffect(() => {
-    service.findAll<AppDTO>(AppDTO).then(({ values }) => setApps(values)).finally(() => setLoading(false));
+    service?.findAll<AppDTO>(AppDTO).then(({ values }) => setApps(values)).finally(() => setLoading(false));
   }, [ service ])
+
+  useEffect(() => {
+    if (apps) {
+      let result = apps.slice();
+
+      if (filter && filter.length > 0) {
+        result = result.filter(item => 
+          item.name.toLocaleLowerCase().includes(filter) ||
+          item.partner.name.toLocaleLowerCase().includes(filter)
+        )
+      }
+
+      if (host && host.length > 0) {
+        result = result.filter(item => (item.host as Array<string>).includes(host.toLocaleLowerCase()));
+      }
+
+      if (hosting && hosting.length > 0) {
+        result = result.filter(item => hosting === 'cloud' ? item.hosting.length === 1 : item.hosting.length > 1);
+      }
+
+      if (payment && payment.length > 0) {
+        result = result.filter(item => payment === 'paid' ? item.isPaid : !item.isPaid)
+      }
+
+      setDisplayedApps(result);
+    }
+  }, [ apps, filter, host, hosting, payment ]);
 
   return (
     <Page padding='40px 0'>
@@ -158,22 +215,57 @@ export const Index = () => {
             </Row>
           </Grid>
         </Row>
-        <Row>
+        <Row margin='16px 0'>
           <Grid fluid padding="16px 20px">
             <Row>
               <Grid fluid vertical>
+                <Column margin='0 8px 0 0'>
+                <Field name='search' label='Search'>
+                    {() => 
+                      <Textfield 
+                        value={ filter }
+                        placeholder='Search for apps'
+                        onChange={ ({ currentTarget: { value }}) => setFilter(value) }
+                        elemAfterInput={ <div style={{ marginRight: '8px' }}><SearchIcon primaryColor={ colors.N300 } label='search' size='small' /></div> }
+                        isDisabled={ isLoading } />
+                    }
+                  </Field>
+                </Column>
+                <Column width='150px' margin='0 8px 0 0'>
+                  <Field name='host' label='Host'>
+                    {() => <Select options={ hostOptions } value={ hostOptions.find(item => item.value === host) } onChange={ (item) => item && setHost(item.value) } /> }
+                  </Field>
+                </Column>
+                <Column width='150px' margin='0 8px 0 0'>
+                  <Field name='payment' label='Payment model'>
+                    {() => <Select options={ paymentOptions } value={ paymentOptions.find(item => item.value === payment) } onChange={ (item) => item && setPayment(item.value) } /> }
+                  </Field>
+                </Column>
+                <Column width='150px' margin='0 8px 0 0'>
+                  <Field name='hosting' label='Hosting'>
+                    {() => <Select options={ hostingOptions } value={ hostingOptions.find(item => item.value === hosting) } onChange={ (item) => item && setHosting(item.value) } /> }
+                  </Field>
+                </Column>
                 <Column stretched></Column>
-                { !isLoading && (
-                  <Column>{apps.length} Forge apps listed</Column>
-                )}
+                <Column padding='30px 0 0 0' height='40px' align='center'>
+                  { isLoading 
+                    ? <Spinner /> 
+                    : displayedApps.length !== apps.length 
+                      ? <>Showing {displayedApps.length} out of {apps.length} Forge apps</> 
+                      : <>{apps.length} Forge apps listed</>
+                  }
+                </Column>
               </Grid>
             </Row>
             <Row margin="12px 0">
               <DynamicTable
                 head={ createHead() }
-                rows={ createRows(apps) }
+                rows={ createRows(displayedApps) }
                 emptyView={ <span>There are no Forge apps available</span> }
-                isLoading={ isLoading } />
+                isLoading={ isLoading }
+                rowsPerPage={50}
+                defaultPage={1}
+                />
             </Row>
           </Grid>
         </Row>

@@ -38,7 +38,9 @@ container.bind<PubSubHandler>(PubSubHandlers).to(ImportAppTask);
 
 // ------------------------------------------------------------------------------------------ Bindings :: Scheduled Tasks
 
-container.bind<ScheduledPubSubHandler>(ScheduledPubSubHandlers).to(ImportAppsScheduledTask);
+if (isProduction()) {
+  container.bind<ScheduledPubSubHandler>(ScheduledPubSubHandlers).to(ImportAppsScheduledTask);
+}
 
 // ------------------------------------------------------------------------------------------ Export
 
