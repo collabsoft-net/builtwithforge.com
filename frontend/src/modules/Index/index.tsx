@@ -220,11 +220,11 @@ export const Index = () => {
             <Row>
               <Grid fluid vertical>
                 <Column margin='0 8px 0 0'>
-                <Field name='search' label='Search'>
+                  <Field name='search' label='Search'>
                     {() => 
                       <Textfield 
                         value={ filter }
-                        placeholder='Search for apps'
+                        placeholder='By name or partner'
                         onChange={ ({ currentTarget: { value }}) => setFilter(value) }
                         elemAfterInput={ <div style={{ marginRight: '8px' }}><SearchIcon primaryColor={ colors.N300 } label='search' size='small' /></div> }
                         isDisabled={ isLoading } />
@@ -233,17 +233,17 @@ export const Index = () => {
                 </Column>
                 <Column width='150px' margin='0 8px 0 0'>
                   <Field name='host' label='Host'>
-                    {() => <Select options={ hostOptions } value={ hostOptions.find(item => item.value === host) } onChange={ (item) => item && setHost(item.value) } /> }
+                    {() => <Select options={ hostOptions } value={ hostOptions.find(item => item.value === host) } onChange={ (item) => item && setHost(item.value) } isDisabled={ isLoading } /> }
                   </Field>
                 </Column>
                 <Column width='150px' margin='0 8px 0 0'>
                   <Field name='payment' label='Payment model'>
-                    {() => <Select options={ paymentOptions } value={ paymentOptions.find(item => item.value === payment) } onChange={ (item) => item && setPayment(item.value) } /> }
+                    {() => <Select options={ paymentOptions } value={ paymentOptions.find(item => item.value === payment) } onChange={ (item) => item && setPayment(item.value) } isDisabled={ isLoading } /> }
                   </Field>
                 </Column>
                 <Column width='150px' margin='0 8px 0 0'>
                   <Field name='hosting' label='Hosting'>
-                    {() => <Select options={ hostingOptions } value={ hostingOptions.find(item => item.value === hosting) } onChange={ (item) => item && setHosting(item.value) } /> }
+                    {() => <Select options={ hostingOptions } value={ hostingOptions.find(item => item.value === hosting) } onChange={ (item) => item && setHosting(item.value) } isDisabled={ isLoading } /> }
                   </Field>
                 </Column>
                 <Column stretched></Column>
