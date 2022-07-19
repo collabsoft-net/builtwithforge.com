@@ -2,6 +2,8 @@
 import { Grid, Header, Page, Paragraph, Row } from '@collabsoft-net/components';
 import React from 'react';
 import { ForgeApps } from '../../components/Molecules/ForgeApps';
+import Icon from '../../assets/icon.svg';
+import Avatar from '@atlaskit/avatar';
 
 export const Overview = () => (
   <Page padding='40px 0'>
@@ -10,6 +12,9 @@ export const Overview = () => (
         <Grid>
           <Row>
             <Grid alignItems='center'>
+              <Row>
+                <Avatar src={ Icon } />
+              </Row>
               <Row>
                 <Header weight='h900'>State of Forge</Header>
               </Row>

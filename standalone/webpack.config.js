@@ -134,16 +134,14 @@ const getBaseConfig = (type) => ({
       'process.env.LICENSING_ENABLED': JSON.stringify(process.env.LICENSING_ENABLED),
       'process.env.AC_BASEURL': JSON.stringify(process.env.AC_BASEURL)
     }),
-    /*
     new CopyPlugin({
       patterns: [
         {
           from: '../frontend/src/assets',
-          to: `./assets/[name][ext]`
+          to: `../assets/[name][ext]`
         }
       ],
     })
-    */
   ]
 });
 

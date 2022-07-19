@@ -40,6 +40,7 @@
     "./src/**/*.tsx",
     "./typings/**/*.d.ts",
     "../typings/**/*.d.ts",
+    "../frontend/typings/**/*.d.ts",
     "../node_modules/@collabsoft-net/**/*.d.ts"
   ],
   "compileOnSave": false
