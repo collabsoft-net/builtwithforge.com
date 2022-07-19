@@ -1,4 +1,4 @@
-import { modules } from 'API/constants/Modules';
+import { modules } from 'API/constants/modules';
 import { Injectables } from 'API/Injectables';
 import { ContainerModule, interfaces } from 'inversify';
 import React from 'react';
