@@ -62,6 +62,7 @@
     "@atlaskit/textfield": "5.1.12",
     "@collabsoft-net/clients": "1.0.0-alpha.194",
     "@collabsoft-net/components": "1.0.0-alpha.194",
+    "@collabsoft-net/connect": "1.0.0-alpha.176",
     "@collabsoft-net/controllers": "1.0.0-alpha.194",
     "@collabsoft-net/dto": "1.0.0-alpha.176",
     "@collabsoft-net/emitters": "1.0.0-alpha.176",

@@ -1270,6 +1270,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@collabsoft-net/connect@npm:1.0.0-alpha.176":
+  version: 1.0.0-alpha.176
+  resolution: "@collabsoft-net/connect@npm:1.0.0-alpha.176::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40collabsoft-net%2Fconnect%2F1.0.0-alpha.176%2F8fb3bef447ea40d1db909c0f5dae4188773b7ac0987e29227ecedff9fc8d7c59"
+  peerDependencies:
+    "@atlaskit/modal-dialog": 12.0.1
+    "@juggle/resize-observer": 3.3.1
+    inversify: 6.0.1
+    query-string: 7.0.1
+    react: 16.14.0
+    react-dom: 16.14.0
+    styled-components: 3.2.6
+  checksum: 03f0cb18dfc7e44b376d0728cb86b589d9dcc651f5036935b1b60aae7522010587e9930b1671f21932e106fb0cce548733106473487b130086a19200d7fd63a4
+  languageName: node
+  linkType: hard
+
 "@collabsoft-net/controllers@npm:1.0.0-alpha.194":
   version: 1.0.0-alpha.194
   resolution: "@collabsoft-net/controllers@npm:1.0.0-alpha.194::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40collabsoft-net%2Fcontrollers%2F1.0.0-alpha.194%2F21841515640754de44f93a2b8852941fc115ae6bfa557192115da63840488090"
@@ -2222,6 +2237,7 @@ __metadata:
     "@aws-sdk/client-route-53": 3.128.0
     "@collabsoft-net/clients": 1.0.0-alpha.194
     "@collabsoft-net/components": 1.0.0-alpha.194
+    "@collabsoft-net/connect": 1.0.0-alpha.176
     "@collabsoft-net/controllers": 1.0.0-alpha.194
     "@collabsoft-net/dto": 1.0.0-alpha.176
     "@collabsoft-net/emitters": 1.0.0-alpha.176
@@ -2313,6 +2329,7 @@ __metadata:
     "@aws-sdk/client-route-53": 3.128.0
     "@collabsoft-net/clients": 1.0.0-alpha.194
     "@collabsoft-net/components": 1.0.0-alpha.194
+    "@collabsoft-net/connect": 1.0.0-alpha.176
     "@collabsoft-net/controllers": 1.0.0-alpha.194
     "@collabsoft-net/dto": 1.0.0-alpha.176
     "@collabsoft-net/emitters": 1.0.0-alpha.176
@@ -2403,6 +2420,7 @@ __metadata:
     "@atlaskit/textfield": 5.1.12
     "@aws-sdk/client-route-53": 3.128.0
     "@collabsoft-net/clients": 1.0.0-alpha.194
+    "@collabsoft-net/connect": 1.0.0-alpha.176
     "@collabsoft-net/controllers": 1.0.0-alpha.194
     "@collabsoft-net/dto": 1.0.0-alpha.176
     "@collabsoft-net/emitters": 1.0.0-alpha.176
@@ -2490,6 +2508,7 @@ __metadata:
     "@aws-sdk/client-route-53": 3.128.0
     "@collabsoft-net/clients": 1.0.0-alpha.194
     "@collabsoft-net/components": 1.0.0-alpha.194
+    "@collabsoft-net/connect": 1.0.0-alpha.176
     "@collabsoft-net/controllers": 1.0.0-alpha.194
     "@collabsoft-net/dto": 1.0.0-alpha.176
     "@collabsoft-net/emitters": 1.0.0-alpha.176
@@ -8401,6 +8420,7 @@ __metadata:
     "@aws-sdk/client-route-53": 3.128.0
     "@collabsoft-net/clients": 1.0.0-alpha.194
     "@collabsoft-net/components": 1.0.0-alpha.194
+    "@collabsoft-net/connect": 1.0.0-alpha.176
     "@collabsoft-net/controllers": 1.0.0-alpha.194
     "@collabsoft-net/dto": 1.0.0-alpha.176
     "@collabsoft-net/emitters": 1.0.0-alpha.176

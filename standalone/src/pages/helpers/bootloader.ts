@@ -13,7 +13,7 @@ const isValidRequest = (): { moduleId: string }|null => {
   if (window && document && document.head) {
     const url = new URL(window.location.href);
     const moduleId = url.searchParams.get('s');
-    return { moduleId: moduleId as string || 'Index' };
+    return { moduleId: moduleId as string || 'Overview' };
   }
   return null;
 };

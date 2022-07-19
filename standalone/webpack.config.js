@@ -12,14 +12,14 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 // ------------------------------------------------------------------------------------------ Module Exports
 
-const getBaseConfig = () => ({
+const getBaseConfig = (type) => ({
   entry: {
-    app: `./src/index.ts`
+    app: `./src/${type}/index.ts`
   },
 
   output: {
     filename: '[name].[fullhash].js',
-    path: path.resolve(__dirname, `./public`)
+    path: path.resolve(__dirname, `./public/${type}`)
   },
 
   resolve: {
@@ -152,7 +152,7 @@ const getConfig = (type) => {
 
   const htmlWebpackPluginConfig = {
     inject: 'body',
-    template: path.resolve(__dirname, `./src/index.html`),
+    template: path.resolve(__dirname, `./src/${type}/index.html`),
     chunksSortMode: 'none'
   };
 
@@ -173,4 +173,4 @@ const getConfig = (type) => {
   return config;
 };
 
-module.exports = [ getConfig() ];
+module.exports = [ getConfig('pages'), getConfig('macro') ];

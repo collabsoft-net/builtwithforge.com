@@ -1,6 +1,6 @@
 
 import DynamicTable from '@atlaskit/dynamic-table';
-import { Column, Grid, Header, Page, Paragraph, Row } from '@collabsoft-net/components';
+import { Column, Grid, Row } from '@collabsoft-net/components';
 import React, { useEffect, useState } from 'react';
 import kernel from 'API/kernel';
 import { RestClientService } from 'API/services/RestClientService';
@@ -153,7 +153,7 @@ const hostOptions = [
   { label: 'Confluence', value: 'Confluence' },
 ];
 
-export const Index = () => {
+export const ForgeApps = () => {
 
   const [ service ] = useState(kernel.get<RestClientService>(Injectables.RestClientService));
   const [ apps, setApps ] = useState<Array<AppDTO>>([]);
@@ -197,79 +197,57 @@ export const Index = () => {
   }, [ apps, filter, host, hosting, payment ]);
 
   return (
-    <Page padding='40px 0'>
-      <Grid fluid padding="0 20px">
-        <Row>
-          <Grid>
-            <Row>
-              <Grid alignItems='center'>
-                <Row>
-                  <Header weight='h900'>State of Forge</Header>
-                </Row>
-                <Row margin="16px 0 0">
-                  <Paragraph>
-                    Your daily updated overview of Forge apps as listed on the Atlassian Marketplace
-                  </Paragraph>
-                </Row>
-              </Grid>
-            </Row>
-          </Grid>
-        </Row>
-        <Row margin='16px 0'>
-          <Grid fluid padding="16px 20px">
-            <Row>
-              <Grid fluid vertical>
-                <Column margin='0 8px 0 0'>
-                  <Field name='search' label='Search'>
-                    {() => 
-                      <Textfield 
-                        value={ filter }
-                        placeholder='By name or partner'
-                        onChange={ ({ currentTarget: { value }}) => setFilter(value) }
-                        elemAfterInput={ <div style={{ marginRight: '8px' }}><SearchIcon primaryColor={ colors.N300 } label='search' size='small' /></div> }
-                        isDisabled={ isLoading } />
-                    }
-                  </Field>
-                </Column>
-                <Column width='150px' margin='0 8px 0 0'>
-                  <Field name='host' label='Host'>
-                    {() => <Select options={ hostOptions } value={ hostOptions.find(item => item.value === host) } onChange={ (item) => item && setHost(item.value) } isDisabled={ isLoading } /> }
-                  </Field>
-                </Column>
-                <Column width='150px' margin='0 8px 0 0'>
-                  <Field name='payment' label='Payment model'>
-                    {() => <Select options={ paymentOptions } value={ paymentOptions.find(item => item.value === payment) } onChange={ (item) => item && setPayment(item.value) } isDisabled={ isLoading } /> }
-                  </Field>
-                </Column>
-                <Column width='150px' margin='0 8px 0 0'>
-                  <Field name='hosting' label='Hosting'>
-                    {() => <Select options={ hostingOptions } value={ hostingOptions.find(item => item.value === hosting) } onChange={ (item) => item && setHosting(item.value) } isDisabled={ isLoading } /> }
-                  </Field>
-                </Column>
-                <Column stretched></Column>
-                <Column padding='30px 0 0 0' height='40px' align='center'>
-                  { isLoading 
-                    ? <Spinner /> 
-                    : displayedApps.length !== apps.length 
-                      ? <>Showing {displayedApps.length} out of {apps.length} Forge apps</> 
-                      : <>{apps.length} Forge apps listed</>
-                  }
-                </Column>
-              </Grid>
-            </Row>
-            <Row margin="12px 0">
-              <DynamicTable
-                head={ createHead() }
-                rows={ createRows(displayedApps) }
-                emptyView={ <span>There are no Forge apps available</span> }
-                isLoading={ isLoading }
-                rowsPerPage={50}
-                defaultPage={1}
-                />
-            </Row>
-          </Grid>
-        </Row>
-      </Grid>
-    </Page>
+    <Grid fluid padding="16px 20px">
+      <Row>
+        <Grid fluid vertical>
+          <Column margin='0 8px 0 0'>
+            <Field name='search' label='Search'>
+              {() => 
+                <Textfield 
+                  value={ filter }
+                  placeholder='By name or partner'
+                  onChange={ ({ currentTarget: { value }}) => setFilter(value) }
+                  elemAfterInput={ <div style={{ marginRight: '8px' }}><SearchIcon primaryColor={ colors.N300 } label='search' size='small' /></div> }
+                  isDisabled={ isLoading } />
+              }
+            </Field>
+          </Column>
+          <Column width='150px' margin='0 8px 0 0'>
+            <Field name='host' label='Host'>
+              {() => <Select options={ hostOptions } value={ hostOptions.find(item => item.value === host) } onChange={ (item) => item && setHost(item.value) } isDisabled={ isLoading } /> }
+            </Field>
+          </Column>
+          <Column width='150px' margin='0 8px 0 0'>
+            <Field name='payment' label='Payment model'>
+              {() => <Select options={ paymentOptions } value={ paymentOptions.find(item => item.value === payment) } onChange={ (item) => item && setPayment(item.value) } isDisabled={ isLoading } /> }
+            </Field>
+          </Column>
+          <Column width='150px' margin='0 8px 0 0'>
+            <Field name='hosting' label='Hosting'>
+              {() => <Select options={ hostingOptions } value={ hostingOptions.find(item => item.value === hosting) } onChange={ (item) => item && setHosting(item.value) } isDisabled={ isLoading } /> }
+            </Field>
+          </Column>
+          <Column stretched></Column>
+          <Column padding='30px 0 0 0' height='40px' align='center'>
+            { isLoading 
+              ? <Spinner /> 
+              : displayedApps.length !== apps.length 
+                ? <>Showing {displayedApps.length} out of {apps.length} Forge apps</> 
+                : <>{apps.length} Forge apps listed</>
+            }
+          </Column>
+        </Grid>
+      </Row>
+      <Row margin="12px 0">
+        <DynamicTable
+          head={ createHead() }
+          rows={ createRows(displayedApps) }
+          emptyView={ <span>There are no Forge apps available</span> }
+          isLoading={ isLoading }
+          rowsPerPage={50}
+          defaultPage={1}
+          />
+      </Row>
+    </Grid>
   );
 }

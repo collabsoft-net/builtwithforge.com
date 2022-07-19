@@ -1,3 +1,4 @@
 
-import './controllers/DefaultController';
 import './controllers/AppsController';
+import './controllers/DefaultController';
+import './controllers/DescriptorController';
