@@ -175,13 +175,13 @@ export const ForgeApps = () => {
 
       if (filter && filter.length > 0) {
         result = result.filter(item => 
-          item.name.toLocaleLowerCase().includes(filter) ||
-          item.partner.name.toLocaleLowerCase().includes(filter)
+          item.name.toLocaleLowerCase().includes(filter.toLowerCase()) ||
+          item.partner.name.toLocaleLowerCase().includes(filter.toLowerCase())
         )
       }
 
       if (host && host.length > 0) {
-        result = result.filter(item => (item.host as Array<string>).includes(host.toLocaleLowerCase()));
+        result = result.filter(item => (item.host as Array<string>).includes(host.toLowerCase()));
       }
 
       if (hosting && hosting.length > 0) {
