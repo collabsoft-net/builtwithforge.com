@@ -7,12 +7,12 @@ import { createAppServer, registerPubSubHandlers } from '@collabsoft-net/functio
 import * as Sentry from '@sentry/node';
 import * as functions from 'firebase-functions';
 import { RuntimeOptions } from 'firebase-functions';
-import { log } from 'firebase-functions/lib/logger';
+import { logger } from 'firebase-functions';
 
 import { container } from './inversify.config';
 
 if (process.env.SENTRY_DSN) {
-  log('Initializing Sentry', { dsn: process.env.SENTRY_DSN })
+  logger.log('Initializing Sentry', { dsn: process.env.SENTRY_DSN })
   Sentry.init({
     dsn: process.env.SENTRY_DSN,
   });

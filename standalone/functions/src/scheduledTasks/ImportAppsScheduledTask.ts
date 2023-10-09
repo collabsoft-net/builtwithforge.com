@@ -53,4 +53,8 @@ export class ImportAppsScheduledTask extends AbstractScheduledPubSubHandler {
     return apps;
   }
 
+  protected async timeoutImminent(): Promise<void> {
+    // IGNORE THIS FOR NOW
+  }
+
 }

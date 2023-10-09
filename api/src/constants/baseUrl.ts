@@ -1,2 +1,2 @@
 
-export const baseUrl = process.env.AC_BASEURL || 'forge.report';
+export const baseUrl = process.env.AC_BASEURL || 'builtwithforge.com';

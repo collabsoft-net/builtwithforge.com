@@ -2,13 +2,13 @@ version: 2.1
 jobs:
 
   # cloud - production
-  forge-report-app-functions:
+  builtwithforge-com-functions:
     executor: functions
     steps:
       - functions:
           project: forge-report-app
 
-  forge-report-app-hosting:
+  builtwithforge-com-hosting:
     executor: hosting
     steps:
       - hosting:
@@ -18,13 +18,13 @@ executors:
       
   functions:
     docker:
-      - image: cimg/node:16.14.2-browsers
+      - image: cimg/node:18.16-browsers
     resource_class: large
     working_directory: ~/forge/standalone/functions
 
   hosting:
     docker:
-      - image: cimg/node:16.14.2-browsers
+      - image: cimg/node:18.16-browsers
     resource_class: large
     working_directory: ~/forge/standalone
 
@@ -64,7 +64,7 @@ commands:
     steps:
       - prepare
 
-      - deploy:
+      - run:
           name: Deploy firebase functions
           command: yarn run firebase deploy -f --only functions --project << parameters.project >>
 
@@ -75,7 +75,7 @@ commands:
     steps:
       - prepare
       
-      - deploy:
+      - run:
           name: Deploy firebase hosting & database
           command: |
             export NODE_ENV=production
@@ -83,19 +83,16 @@ commands:
             yarn run firebase deploy -f --only hosting --project << parameters.project >>
 
 workflows:
-  version: 2
   deploy:
     jobs:
       # Cloud - Production
-      - forge-report-app-functions:
+      - builtwithforge-com-functions:
           filters:
             branches:
               only: main
-          context: forge.report
-      - forge-report-app-hosting:
+      - builtwithforge-com-hosting:
           requires:
-            - forge-report-app-functions
+            - builtwithforge-com-functions
           filters:
             branches:
               only: main
-          context: forge.report
